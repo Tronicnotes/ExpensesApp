@@ -25,6 +25,15 @@ enum BudgetFrequency: CaseIterable {
 struct Budget {
     var value: Double
     var frequency: BudgetFrequency
+
+    init(value: Double, frequency: BudgetFrequency) {
+        self.value = value
+        self.frequency = frequency
+    }
+
+    init(from data: Budget.Data) {
+        self.init(value: data.value, frequency: data.frequency)
+    }
 }
 
 extension Budget {

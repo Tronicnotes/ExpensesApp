@@ -18,14 +18,12 @@ struct DashboardView: View {
     // MARK: - Content Builder
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    headerView
-                    currentBudgetView
-                    recentTransactionsView
-                }
-                .padding(16)
+            VStack(alignment: .leading, spacing: 24) {
+                headerView
+                currentBudgetView
+                recentTransactionsView
             }
+            .padding(16)
             .navigationTitle("MyBudget")
         }
     }
@@ -74,12 +72,14 @@ private extension DashboardView {
                 }
             }
             if transactionStore.transactions.count > 0 {
-                ForEach(transactionStore.transactions) { transaction in
-                    TransactionRowView(transaction: transaction)
-                        .background(Color.white)
-                        .cornerRadius(16)
-                        .shadow(color: .black.opacity(0.15), radius: 5, x: 1, y: 1)
+                List(transactionStore.transactions, id: \.self) { transaction in
+                    NavigationLink(
+                        destination: TransactionDetailsView(transaction: binding(for: transaction)),
+                        label: {
+                            TransactionRowView(transaction: transaction)
+                        })
                 }
+                .listStyle(InsetListStyle())
             } else {
                 Text("There are no recorded transactions yet")
                     .font(.caption)
@@ -94,6 +94,13 @@ private extension DashboardView {
     func calculateCurrentBalanceRemaining() -> String {
         guard let user = userStore.user else { return "" }
         return user.budget.value.formatCurrency() ?? 0.formatCurrency()!
+    }
+
+    func binding(for transaction: Transaction) -> Binding<Transaction> {
+        guard let transactionIndex = transactionStore.transactions.firstIndex(where: { $0.id == transaction.id }) else {
+            fatalError("Cannot locate transaction within the array")
+        }
+        return $transactionStore.transactions[transactionIndex]
     }
 
     var budgetFrequencyLabel: String {

@@ -66,7 +66,7 @@ extension Transaction {
 
 // MARK: - Data Helper
 extension Transaction {
-    struct Data {
+    struct Data: Equatable {
         var title: String = ""
         var category: Category = .shopping
         var amountNZD: Double = 0

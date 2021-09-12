@@ -11,6 +11,18 @@ struct User {
     var firstName: String
     var lastName: String
     var budget: Budget
+
+    init(firstName: String,
+         lastName: String,
+         budget: Budget) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.budget = budget
+    }
+
+    init(from data: User.Data) {
+        self.init(firstName: data.firstName, lastName: data.lastName, budget: Budget(from: data.budget))
+    }
 }
 
 extension User {

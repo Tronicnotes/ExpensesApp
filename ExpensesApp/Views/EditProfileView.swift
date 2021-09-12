@@ -73,7 +73,12 @@ private extension EditProfileView {
     var saveButtonView: some View {
         if userStore.user?.data != userData {
             Button {
-                userStore.user?.update(from: userData)
+                if userStore.user == nil {
+                    userStore.user = User(from: userData)
+                } else {
+                    userStore.user?.update(from: userData)
+                }
+                hideKeyboard()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text(isNewUser ? "Continue" : "Save")

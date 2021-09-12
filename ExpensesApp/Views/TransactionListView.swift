@@ -50,7 +50,11 @@ private extension TransactionListView {
                 ForEach(transactionStore.groupedTransactions.sorted(by: { $0.key > $1.key }), id: \.key) { date, transactions in
                     Section(header: Text(date.EEEEMMMDDYYYY())) {
                             ForEach(transactions, id: \.self) { transaction in
-                                TransactionRowView(transaction: transaction)
+                                NavigationLink(
+                                    destination: TransactionDetailsView(transaction: binding(for: transaction)),
+                                    label: {
+                                        TransactionRowView(transaction: transaction)
+                                    })
                             }
                         }
                 }
@@ -71,6 +75,16 @@ private extension TransactionListView {
                 .resizable()
                 .frame(width: addButtonSize, height: addButtonSize)
         }
+    }
+}
+
+// MARK: - Helper Methods
+private extension TransactionListView {
+    func binding(for transaction: Transaction) -> Binding<Transaction> {
+        guard let transactionIndex = transactionStore.transactions.firstIndex(where: { $0.id == transaction.id }) else {
+            fatalError("Cannot locate transaction within the array")
+        }
+        return $transactionStore.transactions[transactionIndex]
     }
 }
 
