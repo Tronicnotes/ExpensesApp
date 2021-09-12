@@ -23,7 +23,7 @@ struct MainView: View {
                 Label("Transactions", systemImage: "list.bullet")
             }
             .tag(2)
-            ProfileView().tabItem {
+            EditProfileView().tabItem {
                 Label("Profile", systemImage: "person")
             }
             .tag(3)
@@ -32,7 +32,7 @@ struct MainView: View {
             showCreateUserScreen = userStore.user == nil
         }
         .fullScreenCover(isPresented: $showCreateUserScreen) {
-            ProfileView()
+            EditProfileView()
         }
     }
 }

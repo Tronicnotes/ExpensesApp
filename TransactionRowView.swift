@@ -30,7 +30,7 @@ private extension TransactionRowView {
         ZStack(alignment: .center) {
             Circle()
                 .foregroundColor(transaction.category.color)
-            Image(systemName: transaction.category.imageAsset)
+            Image(assetIdentifier: transaction.category.imageAsset)
                 .resizable()
                 .scaledToFit()
                 .padding(8)
@@ -42,7 +42,7 @@ private extension TransactionRowView {
         VStack(alignment: .leading) {
             Text(transaction.title)
                 .font(.body)
-            Text(transaction.category.name)
+            Text(transaction.category.label)
                 .font(.caption)
         }
     }
@@ -62,9 +62,7 @@ private extension TransactionRowView {
 struct TransactionRowView_Previews: PreviewProvider {
     static var previews: some View {
         TransactionRowView(transaction: Transaction(title: "Countdown",
-                                                    category: Category(name: "Groceries",
-                                                                       imageAsset: "bag",
-                                                                       color: .red),
+                                                    category: .shopping,
                                                     amountNZD: 300,
                                                     amountUSD: 250,
                                                     date: Date()))

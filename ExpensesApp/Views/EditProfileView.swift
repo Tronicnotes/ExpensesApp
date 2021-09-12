@@ -1,5 +1,5 @@
 //
-//  ProfileView.swift
+//  EditProfileView.swift
 //  ExpensesApp
 //
 //  Created by Kurt Mohring on 12/09/21.
@@ -7,18 +7,11 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct EditProfileView: View {
     // MARK: - Private Variables
     @Environment(\.presentationMode) private var presentationMode
     @EnvironmentObject private var userStore: UserStore
     @State private var userData: User.Data = User.Data()
-
-    private var currencyFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.isLenient = true
-        formatter.numberStyle = .currency
-        return formatter
-    }()
 
     // MARK: - Content Builder
     var body: some View {
@@ -45,7 +38,7 @@ struct ProfileView: View {
 }
 
 // MARK: - Displaying Views
-private extension ProfileView {
+private extension EditProfileView {
     var headerView: some View {
         VStack(alignment: .leading) {
             Text("MyBudget - the all-in-one budgeting app")
@@ -65,11 +58,8 @@ private extension ProfileView {
 
     var budgetSectionView: some View {
         Section(header: Text("Budget"), footer: Text("Frequency indicates your budgeting period, and all expense calculations will be based on this. This can be adjusted at any time from the Profile page.")) {
-            TextField("Budget", value: $userData.budget.value, formatter: currencyFormatter) { _ in
-                print("changing text")
-            } onCommit: {
-                print("on commit")
-            }.keyboardType(.numbersAndPunctuation)
+            TextField("Budget", value: $userData.budget.value, formatter: NumberFormatter.currencyFormatter())
+                .keyboardType(.numbersAndPunctuation)
             Picker("Frequency", selection: $userData.budget.frequency) {
                 ForEach(BudgetFrequency.allCases, id: \.self) {
                     Text($0.label)
@@ -94,7 +84,7 @@ private extension ProfileView {
 }
 
 // MARK: - Helper Methods
-private extension ProfileView {
+private extension EditProfileView {
     private var isNewUser: Bool {
         return userStore.user == nil
     }
@@ -108,7 +98,7 @@ private extension ProfileView {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        EditProfileView()
             .environmentObject(UserStore())
     }
 }

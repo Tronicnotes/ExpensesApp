@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  DashboardView.swift
 //  ExpensesApp
 //
 //  Created by Kurt Mohring on 12/09/21.
