@@ -9,11 +9,11 @@ import SwiftUI
 
 struct DashboardView: View {
 
-    let transactionsList: [Transaction] = [
-        Transaction(title: "Countdown", category: Category(name: "Groceries", imageAsset: "bag", color: .red), amountNZD: 300, date: Date()),
-        Transaction(title: "Timberland", category: Category(name: "Shopping", imageAsset: "bag", color: .green), amountNZD: 175, date: Date()),
-        Transaction(title: "Sal's Pizza", category: Category(name: "Food", imageAsset: "bag", color: .red), amountNZD: 300, date: Date())
-    ]
+    @ObservedObject private var viewModel: DashboardViewModel
+
+    init(viewModel: DashboardViewModel = DashboardViewModel()) {
+        self.viewModel = viewModel
+    }
 
     // MARK: - Content Builder
     var body: some View {
@@ -35,7 +35,7 @@ struct DashboardView: View {
 private extension DashboardView {
     var headerView: some View {
         VStack(alignment: .leading) {
-            Text("Hi, Kurt")
+            Text("Hi, \(viewModel.profileName)")
                 .font(.title)
             Text("View your current budget, top expenditures, and latest transactions right here.")
                 .font(.caption)
@@ -47,9 +47,9 @@ private extension DashboardView {
             VStack(alignment: .leading) {
                 Text("Current budget remaining")
                     .font(.caption2)
-                Text("$1,300.39")
+                Text(viewModel.currentBudgetRemaining)
                     .font(.title)
-                Text("(Monthly)")
+                Text("(\(viewModel.budgetFrequency.label))")
                     .font(.caption)
             }
             Spacer()
@@ -62,7 +62,7 @@ private extension DashboardView {
     }
 
     var recentTransactionsView: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             HStack {
                 Text("Recent transactions")
                 Spacer()
@@ -73,8 +73,14 @@ private extension DashboardView {
                         .font(.callout)
                 }
             }
-            ForEach(transactionsList) { transaction in
-                TransactionRowView(transaction: transaction)
+            if viewModel.transactions.count > 0 {
+                ForEach(viewModel.transactions) { transaction in
+                    TransactionRowView(transaction: transaction)
+                }
+            } else {
+                Text("There are no recorded transactions yet")
+                    .font(.caption)
+                    .padding(.top)
             }
         }
     }

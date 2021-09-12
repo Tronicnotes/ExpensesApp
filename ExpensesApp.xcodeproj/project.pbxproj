@@ -15,6 +15,8 @@
 		61393FBD26ED8FB00082651F /* ExpensesAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FBC26ED8FB00082651F /* ExpensesAppUITests.swift */; };
 		61393FCE26ED99760082651F /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FCD26ED99750082651F /* TransactionRowView.swift */; };
 		61393FD026ED99C50082651F /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FCF26ED99C50082651F /* Transaction.swift */; };
+		61393FD226EDA9D50082651F /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FD126EDA9D50082651F /* DashboardViewModel.swift */; };
+		61393FD426EDAC020082651F /* TransactionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FD326EDAC020082651F /* TransactionRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		61393FBE26ED8FB00082651F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61393FCD26ED99750082651F /* TransactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRowView.swift; sourceTree = SOURCE_ROOT; };
 		61393FCF26ED99C50082651F /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		61393FD126EDA9D50082651F /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		61393FD326EDAC020082651F /* TransactionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,7 @@
 		61393FCB26ED95C60082651F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				61393FD126EDA9D50082651F /* DashboardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				61393FCF26ED99C50082651F /* Transaction.swift */,
+				61393FD326EDAC020082651F /* TransactionRepository.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -290,6 +296,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				61393FA226ED8FAD0082651F /* DashboardView.swift in Sources */,
+				61393FD226EDA9D50082651F /* DashboardViewModel.swift in Sources */,
+				61393FD426EDAC020082651F /* TransactionRepository.swift in Sources */,
 				61393FA026ED8FAD0082651F /* ExpensesApp.swift in Sources */,
 				61393FD026ED99C50082651F /* Transaction.swift in Sources */,
 				61393FCE26ED99760082651F /* TransactionRowView.swift in Sources */,
