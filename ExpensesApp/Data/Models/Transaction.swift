@@ -31,19 +31,11 @@ struct Transaction: Identifiable, Hashable {
 
 extension Transaction {
     var formattedNZDAmount: String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        return numberFormatter.string(from: NSNumber(value: amountNZD)) ?? "$0.00"
+        amountNZD.formatCurrency() ?? 0.formatCurrency()!
     }
 
     var formattedUSDAmount: String? {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        guard let amountUSD = self.amountUSD,
-              let formattedAmount = numberFormatter.string(from: NSNumber(value: amountUSD)) else {
-            return nil
-        }
-        return formattedAmount + " USD"
+        amountUSD?.formatCurrencyWithISO("USD")
     }
 }
 

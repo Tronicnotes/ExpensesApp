@@ -9,11 +9,8 @@ import SwiftUI
 
 struct DashboardView: View {
 
-    @ObservedObject private var viewModel: DashboardViewModel
-
-    init(viewModel: DashboardViewModel = DashboardViewModel()) {
-        self.viewModel = viewModel
-    }
+    @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var transactionStore: TransactionStore
 
     // MARK: - Content Builder
     var body: some View {
@@ -35,7 +32,7 @@ struct DashboardView: View {
 private extension DashboardView {
     var headerView: some View {
         VStack(alignment: .leading) {
-            Text("Hi, \(viewModel.profileName)")
+            Text("Hi, \(userStore.user?.firstName ?? "John")")
                 .font(.title)
             Text("View your current budget, top expenditures, and latest transactions right here.")
                 .font(.caption)
@@ -47,9 +44,9 @@ private extension DashboardView {
             VStack(alignment: .leading) {
                 Text("Current budget remaining")
                     .font(.caption2)
-                Text(viewModel.currentBudgetRemaining)
+                Text(calculateCurrentBalanceRemaining())
                     .font(.title)
-                Text("(\(viewModel.budgetFrequency.label))")
+                Text(budgetFrequencyLabel)
                     .font(.caption)
             }
             Spacer()
@@ -73,8 +70,8 @@ private extension DashboardView {
                         .font(.callout)
                 }
             }
-            if viewModel.transactions.count > 0 {
-                ForEach(viewModel.transactions) { transaction in
+            if transactionStore.transactions.count > 0 {
+                ForEach(transactionStore.transactions) { transaction in
                     TransactionRowView(transaction: transaction)
                 }
             } else {
@@ -83,6 +80,19 @@ private extension DashboardView {
                     .padding(.top)
             }
         }
+    }
+}
+
+// MARK: - Private Helpers
+private extension DashboardView {
+    func calculateCurrentBalanceRemaining() -> String {
+        guard let user = userStore.user else { return "" }
+        return user.budget.value.formatCurrency() ?? 0.formatCurrency()!
+    }
+
+    var budgetFrequencyLabel: String {
+        guard let user = userStore.user else { return "" }
+        return "(\(user.budget.frequency.label))"
     }
 }
 
