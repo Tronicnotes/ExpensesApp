@@ -11,7 +11,6 @@ struct DashboardView: View {
     // MARK: - Private Variables
     @EnvironmentObject private var userStore: UserStore
     @EnvironmentObject private var transactionStore: TransactionStore
-    @State private var showCreateUserScreen = false
 
     // MARK: - Public Variables
     @Binding var tabSelection: Int
@@ -28,14 +27,6 @@ struct DashboardView: View {
                 .padding(16)
             }
             .navigationTitle("MyBudget")
-        }
-        .onAppear {
-            showCreateUserScreen = userStore.user == nil
-        }
-        .fullScreenCover(isPresented: $showCreateUserScreen) {
-            CreateUserView()
-                .environmentObject(userStore)
-                .environmentObject(transactionStore)
         }
     }
 }

@@ -8,7 +8,31 @@
 import Foundation
 
 struct User {
-    let firstName: String
-    let lastName: String
-    let budget: Budget
+    var firstName: String
+    var lastName: String
+    var budget: Budget
+}
+
+extension User {
+    struct Data: Equatable {
+        var firstName: String = ""
+        var lastName: String = ""
+        var budget: Budget.Data = Budget.Data()
+
+        static func == (lhs: User.Data, rhs: User.Data) -> Bool {
+            return lhs.firstName == rhs.firstName &&
+                lhs.lastName == rhs.lastName &&
+                lhs.budget == rhs.budget
+        }
+    }
+
+    var data: Data {
+        return Data(firstName: firstName, lastName: lastName, budget: budget.data)
+    }
+
+    mutating func update(from data: Data) {
+        firstName = data.firstName
+        lastName = data.lastName
+        budget.update(from: data.budget)
+    }
 }

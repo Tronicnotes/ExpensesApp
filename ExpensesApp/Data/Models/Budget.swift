@@ -8,7 +8,7 @@
 import Foundation
 
 enum BudgetFrequency: CaseIterable {
-    case fortnightly, monthly, weekly
+    case monthly, fortnightly, weekly
 
     var label: String {
         switch self {
@@ -23,6 +23,27 @@ enum BudgetFrequency: CaseIterable {
 }
 
 struct Budget {
-    let value: Double
-    let frequency: BudgetFrequency
+    var value: Double
+    var frequency: BudgetFrequency
+}
+
+extension Budget {
+    struct Data: Equatable {
+        var value: Double = 0
+        var frequency: BudgetFrequency = .monthly
+
+        static func == (lhs: Budget.Data, rhs: Budget.Data) -> Bool {
+            return lhs.value == rhs.value &&
+                lhs.frequency == rhs.frequency
+        }
+    }
+
+    var data: Data {
+        Data(value: value, frequency: frequency)
+    }
+
+    mutating func update(from data: Data) {
+        value = data.value
+        frequency = data.frequency
+    }
 }
