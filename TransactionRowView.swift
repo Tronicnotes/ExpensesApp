@@ -11,6 +11,7 @@ struct TransactionRowView: View {
     let transaction: Transaction
     private let avatarSize: CGFloat = 40
 
+    // MARK: - Content Builder
     var body: some View {
         HStack(spacing: 0) {
             categoryAvatar
@@ -20,12 +21,10 @@ struct TransactionRowView: View {
             amountView
         }
         .padding(8)
-        .background(Color.white)
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.15), radius: 5, x: 1, y: 1)
     }
 }
 
+// MARK: - Displaying Views
 private extension TransactionRowView {
     var categoryAvatar: some View {
         ZStack(alignment: .center) {

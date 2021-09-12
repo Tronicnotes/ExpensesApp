@@ -9,23 +9,25 @@ import SwiftUI
 
 @main
 struct ExpensesAppApp: App {
-    @State private var showCreateUserScreen = false
+
+    @State private var tabSelection = 1
     private let userStore = UserStore()
     private let transactionStore = TransactionStore()
 
     var body: some Scene {
         WindowGroup {
-            DashboardView()
-                .environmentObject(userStore)
-                .environmentObject(transactionStore)
-                .fullScreenCover(isPresented: $showCreateUserScreen) {
-                    CreateUserView()
-                        .environmentObject(userStore)
-                        .environmentObject(transactionStore)
+            TabView(selection: $tabSelection) {
+                DashboardView(tabSelection: $tabSelection).tabItem {
+                    Label("Dashboard", systemImage: "house")
                 }
-                .onAppear {
-                    showCreateUserScreen = userStore.user == nil
+                .tag(1)
+                TransactionListView().tabItem {
+                    Label("Transactions", systemImage: "list.bullet")
                 }
+                .tag(2)
+            }
+            .environmentObject(userStore)
+            .environmentObject(transactionStore)
         }
     }
 }

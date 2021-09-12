@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct DashboardView: View {
+    // MARK: - Private Variables
+    @EnvironmentObject private var userStore: UserStore
+    @EnvironmentObject private var transactionStore: TransactionStore
+    @State private var showCreateUserScreen = false
 
-    @EnvironmentObject var userStore: UserStore
-    @EnvironmentObject var transactionStore: TransactionStore
+    // MARK: - Public Variables
+    @Binding var tabSelection: Int
 
     // MARK: - Content Builder
     var body: some View {
@@ -24,6 +28,14 @@ struct DashboardView: View {
                 .padding(16)
             }
             .navigationTitle("MyBudget")
+        }
+        .onAppear {
+            showCreateUserScreen = userStore.user == nil
+        }
+        .fullScreenCover(isPresented: $showCreateUserScreen) {
+            CreateUserView()
+                .environmentObject(userStore)
+                .environmentObject(transactionStore)
         }
     }
 }
@@ -64,7 +76,7 @@ private extension DashboardView {
                 Text("Recent transactions")
                 Spacer()
                 Button {
-                    print("See all pressed")
+                    tabSelection = 2
                 } label: {
                     Text("See more")
                         .font(.callout)
@@ -73,6 +85,9 @@ private extension DashboardView {
             if transactionStore.transactions.count > 0 {
                 ForEach(transactionStore.transactions) { transaction in
                     TransactionRowView(transaction: transaction)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                        .shadow(color: .black.opacity(0.15), radius: 5, x: 1, y: 1)
                 }
             } else {
                 Text("There are no recorded transactions yet")
@@ -98,6 +113,8 @@ private extension DashboardView {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardView()
+        DashboardView(tabSelection: .constant(1))
+            .environmentObject(UserStore())
+            .environmentObject(TransactionStore())
     }
 }

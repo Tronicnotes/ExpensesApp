@@ -9,16 +9,24 @@ import Foundation
 import Combine
 
 class TransactionStore: ObservableObject {
-    @Published var transactions: [Transaction] = []
+    typealias GroupedTransactions = [Date: [Transaction]]
+    @Published var transactions: [Transaction] = [] {
+        didSet {
+            groupTransactions()
+        }
+    }
+    @Published var groupedTransactions: GroupedTransactions = [:]
 
     private let repository: TransactionSource
     private var cancellable: AnyCancellable?
 
+    // MARK: - Initialiser
     init(repository: TransactionSource = TransactionRepository()) {
         self.repository = repository
         fetchTransactions()
     }
 
+    // MARK: - Public Methods
     func fetchTransactions() {
         cancellable = repository.getTransactions().sink {
             if case let .failure(error) = $0 {
@@ -26,6 +34,16 @@ class TransactionStore: ObservableObject {
             }
         } receiveValue: { transactions in
             self.transactions = transactions
+        }
+    }
+}
+
+// MARK: - Private Methods
+private extension TransactionStore {
+    func groupTransactions() {
+        groupedTransactions = Dictionary(grouping: transactions) { transaction -> Date in
+            let components = Calendar.current.dateComponents([.day, .year, .month], from: transaction.date)
+            return Calendar.current.date(from: components) ?? transaction.date
         }
     }
 }

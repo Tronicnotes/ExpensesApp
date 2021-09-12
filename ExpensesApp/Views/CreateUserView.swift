@@ -80,6 +80,7 @@ private extension CreateUserView {
             TextField("", text: value)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(keyboardType)
+                .disableAutocorrection(true)
         }
     }
 
