@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum CurrencyType: String, CaseIterable {
+enum CurrencyType: String, CaseIterable, Codable {
     case nzd, usd
 
     var label: String {
@@ -16,7 +16,7 @@ enum CurrencyType: String, CaseIterable {
     }
 }
 
-struct Transaction: Identifiable, Hashable {
+struct Transaction: Identifiable, Hashable, Codable {
     var id = UUID()
     var title: String
     var category: Category

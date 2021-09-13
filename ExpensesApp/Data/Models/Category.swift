@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum Category: String, CaseIterable {
+enum Category: String, CaseIterable, Codable {
     case bills, drinks, food, fuel, groceries, rent, shopping, travel
 
     var label: String{

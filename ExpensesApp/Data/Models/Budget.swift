@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BudgetFrequency: CaseIterable {
+enum BudgetFrequency: String, CaseIterable, Codable {
     case monthly, fortnightly, weekly
 
     var label: String {
@@ -22,7 +22,7 @@ enum BudgetFrequency: CaseIterable {
     }
 }
 
-struct Budget {
+struct Budget: Codable {
     var value: Double
     var frequency: BudgetFrequency
 

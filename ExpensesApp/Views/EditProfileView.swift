@@ -60,6 +60,7 @@ private extension EditProfileView {
         Section(header: Text("Budget"), footer: Text("Frequency indicates your budgeting period, and all expense calculations will be based on this. This can be adjusted at any time from the Profile page.")) {
             TextField("Budget", value: $userData.budget.value, formatter: NumberFormatter.currencyFormatter())
                 .keyboardType(.numbersAndPunctuation)
+                .disableAutocorrection(true)
             Picker("Frequency", selection: $userData.budget.frequency) {
                 ForEach(BudgetFrequency.allCases, id: \.self) {
                     Text($0.label)
@@ -98,6 +99,7 @@ private extension EditProfileView {
         TextField(label, text: value)
             .keyboardType(.namePhonePad)
             .disableAutocorrection(true)
+            .autocapitalization(.words)
     }
 }
 

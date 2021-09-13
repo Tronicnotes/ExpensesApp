@@ -45,6 +45,7 @@ private extension EditTransactionView {
             HStack {
                 TextField("Amount", value: $transactionData.amountNZD, formatter: NumberFormatter.currencyFormatter())
                     .keyboardType(.numbersAndPunctuation)
+                    .disableAutocorrection(true)
                 Picker("Currency", selection: $transactionData.currencyType) {
                     ForEach(CurrencyType.allCases, id: \.self) {
                         Text($0.label)

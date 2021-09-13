@@ -8,19 +8,22 @@
 import Foundation
 import Combine
 
-protocol TransactionSource {
+protocol TransactionSource: LocalSource {
     func getTransactions() -> AnyPublisher<[Transaction], Error>
+    func saveTransactions(_ transactions: [Transaction]) -> AnyPublisher<Bool, Error>
 }
 
 struct TransactionRepository: TransactionSource {
+
+    static var filePathComponent: String {
+        return "transaction.data"
+    }
+
     func getTransactions() -> AnyPublisher<[Transaction], Error> {
-        let transactions = [
-            Transaction(title: "Countdown", category: .groceries, amountNZD: 300, date: Date()),
-            Transaction(title: "Timberland", category: .shopping, amountNZD: 175, date: Date()),
-            Transaction(title: "Sal's Pizza", category: .food, amountNZD: 300, date: Date())
-        ]
-        return Just(transactions)
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
+        return self.readLocalData() as AnyPublisher<[Transaction], Error>
+    }
+
+    func saveTransactions(_ transactions: [Transaction]) -> AnyPublisher<Bool, Error> {
+        return self.saveLocalData(transactions) as AnyPublisher<Bool, Error>
     }
 }

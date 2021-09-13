@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
 
+    @Environment(\.scenePhase) private var scenePhase
+    @EnvironmentObject private var transactionStore: TransactionStore
     @EnvironmentObject private var userStore: UserStore
     @State private var showCreateUserScreen = false
     @State private var tabSelection = 1
@@ -33,6 +35,12 @@ struct MainView: View {
         }
         .fullScreenCover(isPresented: $showCreateUserScreen) {
             EditProfileView()
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive {
+                transactionStore.saveTransactions()
+                userStore.saveUser()
+            }
         }
     }
 }

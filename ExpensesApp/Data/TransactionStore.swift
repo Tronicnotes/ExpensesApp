@@ -28,13 +28,25 @@ class TransactionStore: ObservableObject {
 
     // MARK: - Public Methods
     func fetchTransactions() {
-        cancellable = repository.getTransactions().sink {
-            if case let .failure(error) = $0 {
-                print(error)
+        cancellable = repository.getTransactions()
+            .sink {
+                if case let .failure(error) = $0 {
+                    print(error)
+                }
+            } receiveValue: { [weak self] transactions in
+                self?.transactions = transactions
             }
-        } receiveValue: { transactions in
-            self.transactions = transactions
-        }
+    }
+
+    func saveTransactions() {
+        cancellable = repository.saveTransactions(transactions)
+            .sink {
+                if case let .failure(error) = $0 {
+                    print(error)
+                }
+            } receiveValue: { _ in
+                print("Successfully saved transactions")
+            }
     }
 }
 

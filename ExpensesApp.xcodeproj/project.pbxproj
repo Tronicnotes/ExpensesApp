@@ -31,6 +31,8 @@
 		61393FF726EE14280082651F /* NumberFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FF626EE14280082651F /* NumberFormatter+Extensions.swift */; };
 		61393FF926EE1EDE0082651F /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FF826EE1EDE0082651F /* TransactionDetailsView.swift */; };
 		61393FFB26EE23DB0082651F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FFA26EE23DB0082651F /* View+Extensions.swift */; };
+		61EEBDF426EF252C0009078E /* LocalSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBDF326EF252C0009078E /* LocalSource.swift */; };
+		61EEBDF626EF27730009078E /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBDF526EF27730009078E /* UserRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		61393FF626EE14280082651F /* NumberFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		61393FF826EE1EDE0082651F /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
 		61393FFA26EE23DB0082651F /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		61EEBDF326EF252C0009078E /* LocalSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSource.swift; sourceTree = "<group>"; };
+		61EEBDF526EF27730009078E /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,8 @@
 				61393FD526EDAF830082651F /* UserStore.swift */,
 				61393FD926EDB4AC0082651F /* TransactionStore.swift */,
 				61393FCC26ED95D10082651F /* Models */,
+				61EEBDF326EF252C0009078E /* LocalSource.swift */,
+				61EEBDF526EF27730009078E /* UserRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -345,7 +351,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61EEBDF626EF27730009078E /* UserRepository.swift in Sources */,
 				61393FA226ED8FAD0082651F /* DashboardView.swift in Sources */,
+				61EEBDF426EF252C0009078E /* LocalSource.swift in Sources */,
 				61393FD826EDAFD40082651F /* Budget.swift in Sources */,
 				61393FE926EDD4F40082651F /* Date+Extensions.swift in Sources */,
 				61393FDA26EDB4AC0082651F /* TransactionStore.swift in Sources */,
