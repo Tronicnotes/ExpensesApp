@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct TransactionDetailsView: View {
-    @Binding var transaction: Transaction
+    // MARK: - Private Variables
+    @Environment(\.presentationMode) private var presentationMode
     @State private var transactionData = Transaction.Data()
     @State private var editScreenPresented = false
     private let categoryAvatarSize: CGFloat = 32
+
+    // MARK: - Public Variables
+    @Binding var transaction: Transaction
+    let onDelete: () -> Void
 
     // MARK: - Content Builder
     var body: some View {
         Form {
             expenseDetailsSection
+            deleteButtonView
         }
         .onAppear {
             transactionData = transaction.data
@@ -60,6 +66,14 @@ private extension TransactionDetailsView {
         }
     }
 
+    var deleteButtonView: some View {
+        Button("Delete") {
+            onDelete()
+            presentationMode.wrappedValue.dismiss()
+        }
+        .foregroundColor(Color(.systemRed))
+    }
+
     @ViewBuilder
     var footerView: some View {
         if let conversionRate = transactionData.conversionRate {
@@ -89,6 +103,7 @@ private extension TransactionDetailsView {
 
 struct TransactionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionDetailsView(transaction: .constant(Transaction(from: Transaction.Data())))
+        TransactionDetailsView(transaction: .constant(Transaction(from: Transaction.Data())),
+                               onDelete: {})
     }
 }
