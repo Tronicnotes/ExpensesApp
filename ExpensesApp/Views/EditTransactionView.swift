@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct EditTransactionView: View {
+    @EnvironmentObject private var transactionStore: TransactionStore
     @Binding var transactionData: Transaction.Data
 
     // MARK: - Content Builder
     var body: some View {
         Form {
             expenseDetailsSection
+        }
+        .onAppear {
+            transactionStore.getCurrentConversionRate(conversionRate: $transactionData.conversionRate)
         }
     }
 }
@@ -29,7 +33,7 @@ private extension EditTransactionView {
                 }
             }
             HStack {
-                TextField("Amount", value: $transactionData.amountNZD, formatter: NumberFormatter.currencyFormatter())
+                TextField("Amount", value: $transactionData.amount, formatter: NumberFormatter.currencyFormatter())
                     .keyboardType(.numbersAndPunctuation)
                     .disableAutocorrection(true)
                 Picker("Currency", selection: $transactionData.currencyType) {
@@ -46,8 +50,8 @@ private extension EditTransactionView {
 
     @ViewBuilder
     var footerView: some View {
-        if let conversionRate = transactionData.conversionRate {
-            Text("The conversion rate between USD to NZD at this time was: \(conversionRate)")
+        if transactionData.currencyType == .usd, let conversionRate = transactionData.conversionRate {
+            Text("The conversion rate between USD to NZD at this time: \(conversionRate)")
         }
     }
 }
@@ -55,5 +59,6 @@ private extension EditTransactionView {
 struct EditTransactionView_Previews: PreviewProvider {
     static var previews: some View {
         EditTransactionView(transactionData: .constant(Transaction.Data()))
+            .environmentObject(TransactionStore())
     }
 }

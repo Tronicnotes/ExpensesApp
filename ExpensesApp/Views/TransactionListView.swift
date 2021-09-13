@@ -26,15 +26,14 @@ struct TransactionListView: View {
                 EditTransactionView(transactionData: $newTransactionData)
                     .navigationBarItems(leading: Button("Cancel") {
                         addTransactionPresented = false
+                        newTransactionData = Transaction.Data()
                     }, trailing: Button("Add") {
                         let newTransaction = Transaction(from: newTransactionData)
                         transactionStore.transactions.append(newTransaction)
                         addTransactionPresented = false
                         newTransactionData = Transaction.Data()
                     }
-                    .disabled(newTransactionData.title.isEmpty ||
-                                newTransactionData.amountNZD == 0 ||
-                                (newTransactionData.amountUSD != nil && newTransactionData.amountUSD == 0))
+                    .disabled(newTransactionData.title.isEmpty || newTransactionData.amount == 0)
                     )
             }
         }

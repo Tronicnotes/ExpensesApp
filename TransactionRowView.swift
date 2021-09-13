@@ -50,11 +50,15 @@ private extension TransactionRowView {
     var amountView: some View {
         VStack(alignment: .trailing) {
             if let formattedUSDAmount = transaction.formattedUSDAmount {
-                Text(formattedUSDAmount)
+                Text("-\(formattedUSDAmount)")
+                    .bold()
+                Text("-\(transaction.formattedNZDAmount)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            } else {
+                Text("-\(transaction.formattedNZDAmount)")
                     .bold()
             }
-            Text(transaction.formattedNZDAmount)
-                .bold()
         }
     }
 }
@@ -63,8 +67,9 @@ struct TransactionRowView_Previews: PreviewProvider {
     static var previews: some View {
         TransactionRowView(transaction: Transaction(title: "Countdown",
                                                     category: .shopping,
-                                                    amountNZD: 300,
-                                                    amountUSD: 250,
+                                                    amount: 300,
+                                                    currencyType: .usd,
+                                                    conversionRate: 1.4,
                                                     date: Date()))
     }
 }

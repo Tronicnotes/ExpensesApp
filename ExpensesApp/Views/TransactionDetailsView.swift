@@ -31,6 +31,7 @@ struct TransactionDetailsView: View {
                     .navigationBarTitle(transaction.title)
                     .navigationBarItems(leading: Button("Cancel") {
                         editScreenPresented = false
+                        transactionData = transaction.data
                     }, trailing: Button("Save") {
                         editScreenPresented = false
                         transaction.update(from: transactionData)
@@ -51,10 +52,11 @@ private extension TransactionDetailsView {
             }
             if let formattedUSDAmount = transaction.formattedUSDAmount {
                 generateInfoField(title: "Amount", value: formattedUSDAmount)
+                generateInfoField(title: "Amount(NZD)", value: transaction.formattedNZDAmount)
             } else {
                 generateInfoField(title: "Amount", value: transaction.formattedNZDAmount)
             }
-            generateInfoField(title: "Date", value: transaction.date.EEEEMMMDDYYYY())
+            generateInfoField(title: "Date", value: transaction.date.MMMDDHMM())
         }
     }
 

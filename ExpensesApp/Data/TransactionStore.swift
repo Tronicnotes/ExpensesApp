@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class TransactionStore: ObservableObject {
     typealias GroupedTransactions = [Date: [Transaction]]
@@ -46,6 +47,17 @@ class TransactionStore: ObservableObject {
                 }
             } receiveValue: { _ in
                 print("Successfully saved transactions")
+            }
+    }
+
+    func getCurrentConversionRate(conversionRate: Binding<Double?>) {
+        cancellable = repository.fetchConversionRates()
+            .sink {
+                if case let .failure(error) = $0 {
+                    print(error)
+                }
+            } receiveValue: { currencyConversionRates in
+                conversionRate.wrappedValue = currencyConversionRates.currentUSDToNZDRate
             }
     }
 }

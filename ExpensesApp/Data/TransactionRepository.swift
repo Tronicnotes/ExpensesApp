@@ -11,12 +11,16 @@ import Combine
 protocol TransactionSource: LocalSource {
     func getTransactions() -> AnyPublisher<[Transaction], Error>
     func saveTransactions(_ transactions: [Transaction]) -> AnyPublisher<Bool, Error>
+    func fetchConversionRates() -> AnyPublisher<CurrencyConversionRates, Error>
+
 }
 
 struct TransactionRepository: TransactionSource {
 
-    static var filePathComponent: String {
-        return "transaction.data"
+    private let networkingService: TransactionNetworkSource
+
+    init(networkingService: TransactionNetworkSource = TransactionNetworkService()) {
+        self.networkingService = networkingService
     }
 
     func getTransactions() -> AnyPublisher<[Transaction], Error> {
@@ -24,6 +28,16 @@ struct TransactionRepository: TransactionSource {
     }
 
     func saveTransactions(_ transactions: [Transaction]) -> AnyPublisher<Bool, Error> {
-        return self.saveLocalData(transactions) as AnyPublisher<Bool, Error>
+        return self.saveLocalData(transactions)
+    }
+
+    func fetchConversionRates() -> AnyPublisher<CurrencyConversionRates, Error> {
+        return self.networkingService.fetchConversionRates()
+    }
+}
+
+extension TransactionRepository {
+    static var filePathComponent: String {
+        return "transaction.data"
     }
 }
