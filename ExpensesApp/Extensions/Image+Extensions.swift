@@ -16,6 +16,6 @@ extension Image {
 
 extension Image {
     enum MyBudget: String {
-        case billsIcon, drinksIcon, foodIcon, fuelIcon, groceriesIcon, rentIcon, shoppingIcon, travelIcon
+        case billsIcon, drinksIcon, foodIcon, fuelIcon, groceriesIcon, rentIcon, shoppingIcon, travelIcon, otherIcon
     }
 }

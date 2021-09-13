@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum Category: String, CaseIterable, Codable {
-    case bills, drinks, food, fuel, groceries, rent, shopping, travel
+    case bills, drinks, food, fuel, groceries, rent, shopping, travel, other
 
     var label: String{
         return self.rawValue.capitalized
@@ -33,6 +33,8 @@ enum Category: String, CaseIterable, Codable {
             return .shoppingIcon
         case .travel:
             return .travelIcon
+        case .other:
+            return .otherIcon
         }
     }
 
@@ -54,6 +56,8 @@ enum Category: String, CaseIterable, Codable {
             return Color(.systemIndigo)
         case .travel:
             return Color(.systemTeal)
+        case .other:
+            return Color(.systemGray)
         }
     }
 }
