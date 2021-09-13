@@ -9,7 +9,6 @@ import SwiftUI
 
 struct EditTransactionView: View {
     @Binding var transactionData: Transaction.Data
-    private let categoryAvatarSize: CGFloat = 32
 
     // MARK: - Content Builder
     var body: some View {
@@ -26,20 +25,7 @@ private extension EditTransactionView {
             TextField("Title", text: $transactionData.title)
             Picker("Category", selection: $transactionData.category) {
                 ForEach(Category.allCases, id: \.self) { category in
-                    Label(
-                        title: { Text(category.label) },
-                        icon: {
-                            ZStack(alignment: .center) {
-                                Circle()
-                                    .foregroundColor(category.color)
-                                Image(assetIdentifier: category.imageAsset)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .foregroundColor(.white)
-                                    .padding(4)
-                            }
-                            .frame(width: categoryAvatarSize, height: categoryAvatarSize)
-                        })
+                    CategoryRowView(category: category)
                 }
             }
             HStack {

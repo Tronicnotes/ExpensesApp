@@ -28,6 +28,7 @@ struct TransactionDetailsView: View {
         .fullScreenCover(isPresented: $editScreenPresented) {
             NavigationView {
                 EditTransactionView(transactionData: $transactionData)
+                    .navigationBarTitle(transaction.title)
                     .navigationBarItems(leading: Button("Cancel") {
                         editScreenPresented = false
                     }, trailing: Button("Save") {
@@ -45,14 +46,15 @@ struct TransactionDetailsView: View {
 private extension TransactionDetailsView {
     var expenseDetailsSection: some View {
         Section(header: Text("Expense Details"), footer: footerView) {
-            generateInfoField(title: "Title:", value: transaction.title)
-            generateInfoField(title: "Category:", value: transaction.category.label)
-            if let formattedUSDAmount = transaction.formattedUSDAmount {
-                generateInfoField(title: "Amount:", value: formattedUSDAmount)
-            } else {
-                generateInfoField(title: "Amount:", value: transaction.formattedNZDAmount)
+            generateInfoField(title: "Category") {
+                CategoryRowView(category: transaction.category, textColor: .secondary)
             }
-            generateInfoField(title: "Date:", value: transaction.date.EEEEMMMDDYYYY())
+            if let formattedUSDAmount = transaction.formattedUSDAmount {
+                generateInfoField(title: "Amount", value: formattedUSDAmount)
+            } else {
+                generateInfoField(title: "Amount", value: transaction.formattedNZDAmount)
+            }
+            generateInfoField(title: "Date", value: transaction.date.EEEEMMMDDYYYY())
         }
     }
 
@@ -67,17 +69,24 @@ private extension TransactionDetailsView {
 // MARK: - Helper Methods
 private extension TransactionDetailsView {
     func generateInfoField(title: String, value: String) -> some View {
-        HStack {
-            Text(title)
-            Spacer()
+        generateInfoField(title: title) {
             Text(value)
                 .foregroundColor(.secondary)
         }
     }
+
+    func generateInfoField<Content: View>(title: String,
+                                          @ViewBuilder content: () -> Content) -> some View {
+        HStack {
+            Text(title)
+            Spacer()
+            content()
+        }
+    }
 }
 
-//struct TransactionDetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TransactionDetailsView(transactionData: .constant(Transaction.Data()))
-//    }
-//}
+struct TransactionDetailsView_Previews: PreviewProvider {
+    static var previews: some View {
+        TransactionDetailsView(transaction: .constant(Transaction(from: Transaction.Data())))
+    }
+}

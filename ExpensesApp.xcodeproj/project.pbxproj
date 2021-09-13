@@ -33,6 +33,7 @@
 		61393FFB26EE23DB0082651F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FFA26EE23DB0082651F /* View+Extensions.swift */; };
 		61EEBDF426EF252C0009078E /* LocalSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBDF326EF252C0009078E /* LocalSource.swift */; };
 		61EEBDF626EF27730009078E /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBDF526EF27730009078E /* UserRepository.swift */; };
+		61EEBDF826EF2DD90009078E /* CategoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBDF726EF2DD90009078E /* CategoryRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		61393FFA26EE23DB0082651F /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		61EEBDF326EF252C0009078E /* LocalSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSource.swift; sourceTree = "<group>"; };
 		61EEBDF526EF27730009078E /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		61EEBDF726EF2DD90009078E /* CategoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				61393FEE26EDFCC70082651F /* MainView.swift */,
 				61393FF026EE03490082651F /* EditTransactionView.swift */,
 				61393FF826EE1EDE0082651F /* TransactionDetailsView.swift */,
+				61EEBDF726EF2DD90009078E /* CategoryRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				61393FED26EDD8980082651F /* EditProfileView.swift in Sources */,
 				61393FEF26EDFCC70082651F /* MainView.swift in Sources */,
 				61393FF526EE09770082651F /* Image+Extensions.swift in Sources */,
+				61EEBDF826EF2DD90009078E /* CategoryRowView.swift in Sources */,
 				61393FFB26EE23DB0082651F /* View+Extensions.swift in Sources */,
 				61393FD626EDAF830082651F /* UserStore.swift in Sources */,
 			);

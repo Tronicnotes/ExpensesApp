@@ -97,9 +97,8 @@ private extension EditProfileView {
 
     func generateNameTextField(label: String, value: Binding<String>) -> some View {
         TextField(label, text: value)
-            .keyboardType(.namePhonePad)
-            .disableAutocorrection(true)
             .autocapitalization(.words)
+            .disableAutocorrection(true)
     }
 }
 

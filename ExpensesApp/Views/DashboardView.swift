@@ -22,6 +22,7 @@ struct DashboardView: View {
                 headerView
                 currentBudgetView
                 recentTransactionsView
+                Spacer()
             }
             .padding(16)
             .navigationTitle("MyBudget")
