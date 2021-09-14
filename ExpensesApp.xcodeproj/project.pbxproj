@@ -11,7 +11,7 @@
 		61393FA226ED8FAD0082651F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FA126ED8FAD0082651F /* DashboardView.swift */; };
 		61393FA426ED8FAF0082651F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61393FA326ED8FAF0082651F /* Assets.xcassets */; };
 		61393FA726ED8FAF0082651F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61393FA626ED8FAF0082651F /* Preview Assets.xcassets */; };
-		61393FB226ED8FB00082651F /* ExpensesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FB126ED8FB00082651F /* ExpensesAppTests.swift */; };
+		61393FB226ED8FB00082651F /* UserInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FB126ED8FB00082651F /* UserInteractorTests.swift */; };
 		61393FBD26ED8FB00082651F /* ExpensesAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FBC26ED8FB00082651F /* ExpensesAppUITests.swift */; };
 		61393FCE26ED99760082651F /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FCD26ED99750082651F /* TransactionRowView.swift */; };
 		61393FD026ED99C50082651F /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393FCF26ED99C50082651F /* Transaction.swift */; };
@@ -43,6 +43,9 @@
 		61EEBE0826F058AF0009078E /* TransactionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE0726F058AF0009078E /* TransactionInteractor.swift */; };
 		61EEBE0C26F0847E0009078E /* CategoryExpenditureRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE0B26F0847E0009078E /* CategoryExpenditureRow.swift */; };
 		61EEBE0E26F084C00009078E /* CategoryExpenditure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE0D26F084C00009078E /* CategoryExpenditure.swift */; };
+		61EEBE1126F0C04D0009078E /* MockedServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE1026F0C04D0009078E /* MockedServices.swift */; };
+		61EEBE1326F0C0850009078E /* Resolver+XCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE1226F0C0850009078E /* Resolver+XCTests.swift */; };
+		61EEBE1526F0C2710009078E /* TransactionInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE1426F0C2710009078E /* TransactionInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +73,7 @@
 		61393FA626ED8FAF0082651F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		61393FA826ED8FAF0082651F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61393FAD26ED8FB00082651F /* ExpensesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpensesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		61393FB126ED8FB00082651F /* ExpensesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesAppTests.swift; sourceTree = "<group>"; };
+		61393FB126ED8FB00082651F /* UserInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInteractorTests.swift; sourceTree = "<group>"; };
 		61393FB326ED8FB00082651F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61393FB826ED8FB00082651F /* ExpensesAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpensesAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61393FBC26ED8FB00082651F /* ExpensesAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesAppUITests.swift; sourceTree = "<group>"; };
@@ -104,6 +107,9 @@
 		61EEBE0726F058AF0009078E /* TransactionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInteractor.swift; sourceTree = "<group>"; };
 		61EEBE0B26F0847E0009078E /* CategoryExpenditureRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryExpenditureRow.swift; sourceTree = "<group>"; };
 		61EEBE0D26F084C00009078E /* CategoryExpenditure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryExpenditure.swift; sourceTree = "<group>"; };
+		61EEBE1026F0C04D0009078E /* MockedServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedServices.swift; sourceTree = "<group>"; };
+		61EEBE1226F0C0850009078E /* Resolver+XCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resolver+XCTests.swift"; sourceTree = "<group>"; };
+		61EEBE1426F0C2710009078E /* TransactionInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInteractorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,8 +185,10 @@
 		61393FB026ED8FB00082651F /* ExpensesAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				61393FB126ED8FB00082651F /* ExpensesAppTests.swift */,
+				61EEBE0F26F0C02F0009078E /* Mocks */,
+				61393FB126ED8FB00082651F /* UserInteractorTests.swift */,
 				61393FB326ED8FB00082651F /* Info.plist */,
+				61EEBE1426F0C2710009078E /* TransactionInteractorTests.swift */,
 			);
 			path = ExpensesAppTests;
 			sourceTree = "<group>";
@@ -257,6 +265,15 @@
 				61EEBE0726F058AF0009078E /* TransactionInteractor.swift */,
 			);
 			path = Interactors;
+			sourceTree = "<group>";
+		};
+		61EEBE0F26F0C02F0009078E /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				61EEBE1026F0C04D0009078E /* MockedServices.swift */,
+				61EEBE1226F0C0850009078E /* Resolver+XCTests.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,7 +449,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61393FB226ED8FB00082651F /* ExpensesAppTests.swift in Sources */,
+				61EEBE1126F0C04D0009078E /* MockedServices.swift in Sources */,
+				61393FB226ED8FB00082651F /* UserInteractorTests.swift in Sources */,
+				61EEBE1526F0C2710009078E /* TransactionInteractorTests.swift in Sources */,
+				61EEBE1326F0C0850009078E /* Resolver+XCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
