@@ -27,12 +27,12 @@ struct EditProfileView: View {
                     saveButtonView
                 }
                 .listStyle(GroupedListStyle())
-                .navigationTitle(isNewUser ? "Welcome" : "Profile")
-                .onAppear {
-                    if let userData = userStore.user?.data {
-                        self.userData = userData
-                    }
-                }
+            }
+            .navigationTitle(isNewUser ? "Welcome" : "Profile")
+        }
+        .onAppear {
+            if let userData = userStore.user?.data {
+                self.userData = userData
             }
         }
     }

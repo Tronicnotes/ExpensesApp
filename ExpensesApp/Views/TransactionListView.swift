@@ -13,7 +13,6 @@ struct TransactionListView: View {
     @InjectedObject private var transactionStore: TransactionStore
     @State private var addTransactionPresented = false
     @State private var newTransactionData = Transaction.Data()
-    private let addButtonSize: CGFloat = 20
 
     // MARK: - Content Builder
     var body: some View {
@@ -76,8 +75,6 @@ private extension TransactionListView {
             addTransactionPresented = true
         } label: {
             Image(systemName: "plus")
-                .resizable()
-                .frame(width: addButtonSize, height: addButtonSize)
         }
     }
 }
