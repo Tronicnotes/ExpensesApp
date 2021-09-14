@@ -16,13 +16,11 @@ struct TransactionDetailsView: View {
 
     // MARK: - Public Variables
     @Binding var transaction: Transaction
-    let onDelete: () -> Void
 
     // MARK: - Content Builder
     var body: some View {
         Form {
             expenseDetailsSection
-            deleteButtonView
         }
         .onAppear {
             transactionData = transaction.data
@@ -66,14 +64,6 @@ private extension TransactionDetailsView {
         }
     }
 
-    var deleteButtonView: some View {
-        Button("Delete") {
-            onDelete()
-            presentationMode.wrappedValue.dismiss()
-        }
-        .foregroundColor(Color(.systemRed))
-    }
-
     @ViewBuilder
     var footerView: some View {
         if let conversionRate = transactionData.conversionRate {
@@ -103,7 +93,6 @@ private extension TransactionDetailsView {
 
 struct TransactionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionDetailsView(transaction: .constant(Transaction(from: Transaction.Data())),
-                               onDelete: {})
+        TransactionDetailsView(transaction: .constant(Transaction(from: Transaction.Data())))
     }
 }

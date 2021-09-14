@@ -76,11 +76,7 @@ private extension DashboardView {
             if transactionStore.transactions.count > 0 {
                 List(transactionStore.transactions, id: \.self) { transaction in
                     NavigationLink(
-                        destination: TransactionDetailsView(transaction: binding(for: transaction), onDelete: {
-                            if let index = transactionStore.transactions.firstIndex(of: transaction) {
-                                transactionStore.transactions.remove(at: index)
-                            }
-                        }),
+                        destination: TransactionDetailsView(transaction: binding(for: transaction)),
                         label: {
                             TransactionRowView(transaction: transaction)
                         })

@@ -50,14 +50,17 @@ private extension TransactionListView {
                     Section(header: Text(date.EEEEMMMDDYYYY())) {
                             ForEach(transactions, id: \.self) { transaction in
                                 NavigationLink(
-                                    destination: TransactionDetailsView(transaction: binding(for: transaction), onDelete: {
-                                        if let index = transactionStore.transactions.firstIndex(of: transaction) {
-                                            transactionStore.transactions.remove(at: index)
-                                        }
-                                    }),
+                                    destination: TransactionDetailsView(transaction: binding(for: transaction)),
                                     label: {
                                         TransactionRowView(transaction: transaction)
                                     })
+                            }
+                            .onDelete { indexSet in
+                                if let indexElement = indexSet.first,
+                                   let transaction = transactionStore.groupedTransactions[date]?[indexElement],
+                                   let index = transactionStore.transactions.firstIndex(of: transaction) {
+                                    transactionStore.transactions.remove(at: index)
+                                }
                             }
                         }
                 }
