@@ -1,1 +1,2 @@
 # ExpensesApp
+This budgeting app was developed to be able to record your budget and outgoing expenses, track how much budget is remaining, and record in either USD or NZD, including historical conversion rates.
