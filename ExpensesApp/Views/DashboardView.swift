@@ -12,7 +12,6 @@ struct DashboardView: View {
     // MARK: - Private Variables
     @InjectedObject private var userStore: UserStore
     @InjectedObject private var transactionStore: TransactionStore
-    @Injected private var transactionInteractor: TransactionInteractor
 
     // MARK: - Public Variables
     @Binding var tabSelection: Int
@@ -48,16 +47,15 @@ private extension DashboardView {
             VStack(alignment: .leading) {
                 Text("Current budget remaining")
                     .font(.caption2)
-                Text(calculateCurrentBalanceRemaining())
+                Text(remainingBudget.formatCurrency()!)
                     .font(.title)
                 Text(budgetFrequencyLabel)
                     .font(.caption)
             }
             Spacer()
         }
-        .foregroundColor(.white)
         .padding(EdgeInsets(top: 24, leading: 16, bottom: 24, trailing: 16))
-        .background(Color.gray)
+        .background(remainingBudget > 0 ? Color(.systemGreen) : Color(.systemRed))
         .cornerRadius(4)
         .shadow(color: .black.opacity(0.3), radius: 10, x: 1, y: 1)
     }
@@ -94,16 +92,30 @@ private extension DashboardView {
 
 // MARK: - Private Helpers
 private extension DashboardView {
-    func calculateCurrentBalanceRemaining() -> String {
-        guard let user = userStore.user else { return "" }
-        return user.budget.value.formatCurrency() ?? 0.formatCurrency()!
-    }
-
     func binding(for transaction: Transaction) -> Binding<Transaction> {
         guard let transactionIndex = transactionStore.transactions.firstIndex(where: { $0.id == transaction.id }) else {
             fatalError("Cannot locate transaction within the array")
         }
         return $transactionStore.transactions[transactionIndex]
+    }
+
+    var remainingBudget: Double {
+        if let user = userStore.user {
+            var earliestDate = Date()
+            switch user.budget.frequency {
+            case .monthly:
+                earliestDate = Date().startOfMonth()
+            case .fortnightly:
+                earliestDate = Date().startOfFortnight()
+            case .weekly:
+                earliestDate = Date().startOfWeek()
+            }
+            return transactionStore.transactions
+                .filter({ $0.date >= earliestDate })
+                .map { $0.nzdAmount }
+                .reduce(user.budget.value) { $0 - $1 }
+        }
+        return 0
     }
 
     var budgetFrequencyLabel: String {

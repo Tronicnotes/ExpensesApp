@@ -17,7 +17,6 @@ extension Resolver: ResolverRegistering {
             .implements(UserSource.self)
         register { RealUserInteractor(repository: resolve(), userStore: resolve()) }
             .implements(UserInteractor.self)
-            .scope(.application)
         // MARK: - Transaction Registrations
         register { TransactionStore() }
             .scope(.application)
@@ -28,6 +27,5 @@ extension Resolver: ResolverRegistering {
             .implements(TransactionSource.self)
         register { RealTransactionInteractor(repository: resolve(), transactionStore: resolve()) }
             .implements(TransactionInteractor.self)
-//            .scope(.application)
     }
 }

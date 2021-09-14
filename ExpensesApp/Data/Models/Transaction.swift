@@ -51,6 +51,14 @@ struct Transaction: Identifiable, Hashable, Codable {
 
 // MARK: - Helper Methods
 extension Transaction {
+    var nzdAmount: Double {
+        if currencyType == .usd, let conversionRate = self.conversionRate {
+            return (amount * conversionRate)
+        } else {
+            return amount
+        }
+    }
+    
     var formattedNZDAmount: String {
         if currencyType == .usd, let conversionRate = self.conversionRate {
             return (amount * conversionRate).formatCurrencyWithISO("NZD") ?? 0.formatCurrency()!
