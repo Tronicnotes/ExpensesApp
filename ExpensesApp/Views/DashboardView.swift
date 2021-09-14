@@ -19,13 +19,14 @@ struct DashboardView: View {
     // MARK: - Content Builder
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 24) {
-                headerView
-                currentBudgetView
-                recentTransactionsView
-                Spacer()
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    headerView
+                    currentBudgetView
+                    topExpendituresView
+                }
+                .padding(16)
             }
-            .padding(16)
             .navigationTitle("MyBudget")
         }
     }
@@ -60,31 +61,16 @@ private extension DashboardView {
         .shadow(color: .black.opacity(0.3), radius: 10, x: 1, y: 1)
     }
 
-    var recentTransactionsView: some View {
-        VStack(alignment: .center) {
-            HStack {
-                Text("Recent transactions")
-                Spacer()
-                Button {
-                    tabSelection = 2
-                } label: {
-                    Text("See more")
-                        .font(.callout)
+    @ViewBuilder
+    var topExpendituresView: some View {
+        if topExpenditures.count > 0 {
+            VStack(alignment: .leading) {
+                Text("Top Expenditures")
+                VStack(spacing: 8) {
+                    ForEach(topExpenditures, id: \.self) { expenditure in
+                        CategoryExpenditureRow(expediture: expenditure)
+                    }
                 }
-            }
-            if transactionStore.transactions.count > 0 {
-                List(transactionStore.transactions, id: \.self) { transaction in
-                    NavigationLink(
-                        destination: TransactionDetailsView(transaction: binding(for: transaction)),
-                        label: {
-                            TransactionRowView(transaction: transaction)
-                        })
-                }
-                .listStyle(InsetListStyle())
-            } else {
-                Text("There are no recorded transactions yet")
-                    .font(.caption)
-                    .padding(.top)
             }
         }
     }
@@ -116,6 +102,32 @@ private extension DashboardView {
                 .reduce(user.budget.value) { $0 - $1 }
         }
         return 0
+    }
+
+    var topExpenditures: [CategoryExpenditure] {
+        if let user = userStore.user {
+            var earliestDate = Date()
+            switch user.budget.frequency {
+            case .monthly:
+                earliestDate = Date().startOfMonth()
+            case .fortnightly:
+                earliestDate = Date().startOfFortnight()
+            case .weekly:
+                earliestDate = Date().startOfWeek()
+            }
+            let recentTransactions = transactionStore.transactions
+                .filter({ $0.date >= earliestDate })
+            let groupedCategories = Dictionary(grouping: recentTransactions) { $0.category }
+            return groupedCategories.map { category, transactions -> CategoryExpenditure in
+                let totalAmount = transactions
+                    .map { $0.nzdAmount }
+                    .reduce(0) { $0 + $1 }
+                return CategoryExpenditure(category: category,
+                                           totalAmount: totalAmount,
+                                           percentageOfBudget: (totalAmount/user.budget.value)*100)
+            }
+        }
+        return []
     }
 
     var budgetFrequencyLabel: String {

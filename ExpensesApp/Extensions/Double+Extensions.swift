@@ -18,4 +18,9 @@ extension Double {
         guard let formattedValue = self.formatCurrency() else { return nil }
         return "\(formattedValue) \(code.uppercased())"
     }
+
+    func round(to places: Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }

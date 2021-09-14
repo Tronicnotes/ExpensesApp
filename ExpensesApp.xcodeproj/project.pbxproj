@@ -41,6 +41,8 @@
 		61EEBE0326EFFBA80009078E /* ExpensesApp+Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE0226EFFBA80009078E /* ExpensesApp+Resolver.swift */; };
 		61EEBE0626F04EE90009078E /* UserInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE0526F04EE90009078E /* UserInteractor.swift */; };
 		61EEBE0826F058AF0009078E /* TransactionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE0726F058AF0009078E /* TransactionInteractor.swift */; };
+		61EEBE0C26F0847E0009078E /* CategoryExpenditureRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE0B26F0847E0009078E /* CategoryExpenditureRow.swift */; };
+		61EEBE0E26F084C00009078E /* CategoryExpenditure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE0D26F084C00009078E /* CategoryExpenditure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 		61EEBE0226EFFBA80009078E /* ExpensesApp+Resolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExpensesApp+Resolver.swift"; sourceTree = "<group>"; };
 		61EEBE0526F04EE90009078E /* UserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInteractor.swift; sourceTree = "<group>"; };
 		61EEBE0726F058AF0009078E /* TransactionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInteractor.swift; sourceTree = "<group>"; };
+		61EEBE0B26F0847E0009078E /* CategoryExpenditureRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryExpenditureRow.swift; sourceTree = "<group>"; };
+		61EEBE0D26F084C00009078E /* CategoryExpenditure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryExpenditure.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,7 @@
 				61393FF026EE03490082651F /* EditTransactionView.swift */,
 				61393FF826EE1EDE0082651F /* TransactionDetailsView.swift */,
 				61EEBDF726EF2DD90009078E /* CategoryRowView.swift */,
+				61EEBE0B26F0847E0009078E /* CategoryExpenditureRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				61393FDD26EDB6D20082651F /* User.swift */,
 				61393FF226EE051E0082651F /* Category.swift */,
 				61EEBDF926EF51750009078E /* CurrencyConversionRates.swift */,
+				61EEBE0D26F084C00009078E /* CategoryExpenditure.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -392,6 +398,7 @@
 				61EEBE0626F04EE90009078E /* UserInteractor.swift in Sources */,
 				61EEBDF626EF27730009078E /* UserRepository.swift in Sources */,
 				61393FA226ED8FAD0082651F /* DashboardView.swift in Sources */,
+				61EEBE0C26F0847E0009078E /* CategoryExpenditureRow.swift in Sources */,
 				61EEBE0326EFFBA80009078E /* ExpensesApp+Resolver.swift in Sources */,
 				61EEBDF426EF252C0009078E /* LocalSource.swift in Sources */,
 				61393FD826EDAFD40082651F /* Budget.swift in Sources */,
@@ -402,6 +409,7 @@
 				61393FF126EE03490082651F /* EditTransactionView.swift in Sources */,
 				61393FE026EDB7D10082651F /* Double+Extensions.swift in Sources */,
 				61393FF326EE051E0082651F /* Category.swift in Sources */,
+				61EEBE0E26F084C00009078E /* CategoryExpenditure.swift in Sources */,
 				61393FA026ED8FAD0082651F /* ExpensesApp.swift in Sources */,
 				61393FDE26EDB6D20082651F /* User.swift in Sources */,
 				61393FD026ED99C50082651F /* Transaction.swift in Sources */,
