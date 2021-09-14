@@ -5,13 +5,14 @@
 //  Created by Kurt Mohring on 12/09/21.
 //
 
+import Resolver
 import SwiftUI
 
 struct MainView: View {
 
     @Environment(\.scenePhase) private var scenePhase
-    @EnvironmentObject private var transactionStore: TransactionStore
-    @EnvironmentObject private var userStore: UserStore
+    @Injected private var transactionStore: TransactionStore
+    @Injected private var userStore: UserStore
     @State private var showCreateUserScreen = false
     @State private var tabSelection = 1
 

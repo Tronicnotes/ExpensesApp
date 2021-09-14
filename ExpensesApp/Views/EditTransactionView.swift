@@ -5,10 +5,11 @@
 //  Created by Kurt Mohring on 12/09/21.
 //
 
+import Resolver
 import SwiftUI
 
 struct EditTransactionView: View {
-    @EnvironmentObject private var transactionStore: TransactionStore
+    @InjectedObject private var transactionStore: TransactionStore
     @Binding var transactionData: Transaction.Data
 
     // MARK: - Content Builder
@@ -59,6 +60,5 @@ private extension EditTransactionView {
 struct EditTransactionView_Previews: PreviewProvider {
     static var previews: some View {
         EditTransactionView(transactionData: .constant(Transaction.Data()))
-            .environmentObject(TransactionStore())
     }
 }

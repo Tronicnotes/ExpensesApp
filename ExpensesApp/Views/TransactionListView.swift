@@ -5,11 +5,12 @@
 //  Created by Kurt Mohring on 12/09/21.
 //
 
+import Resolver
 import SwiftUI
 
 struct TransactionListView: View {
 
-    @EnvironmentObject private var transactionStore: TransactionStore
+    @InjectedObject private var transactionStore: TransactionStore
     @State private var addTransactionPresented = false
     @State private var newTransactionData = Transaction.Data()
     private let addButtonSize: CGFloat = 20
@@ -94,6 +95,5 @@ private extension TransactionListView {
 struct TransactionList_Previews: PreviewProvider {
     static var previews: some View {
         TransactionListView()
-            .environmentObject(TransactionStore())
     }
 }

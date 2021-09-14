@@ -10,14 +10,9 @@ import SwiftUI
 @main
 struct ExpensesApp: App {
 
-    private let userStore = UserStore()
-    private let transactionStore = TransactionStore()
-
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(userStore)
-                .environmentObject(transactionStore)
         }
     }
 }

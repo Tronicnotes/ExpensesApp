@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,6 +37,8 @@
 		61EEBDFA26EF51750009078E /* CurrencyConversionRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBDF926EF51750009078E /* CurrencyConversionRates.swift */; };
 		61EEBDFC26EF5B220009078E /* NetworkSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBDFB26EF5B220009078E /* NetworkSource.swift */; };
 		61EEBDFE26EF5B550009078E /* TransactionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBDFD26EF5B550009078E /* TransactionNetworkService.swift */; };
+		61EEBE0126EFFB5A0009078E /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 61EEBE0026EFFB5A0009078E /* Resolver */; };
+		61EEBE0326EFFBA80009078E /* ExpensesApp+Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EEBE0226EFFBA80009078E /* ExpensesApp+Resolver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,7 @@
 		61EEBDF926EF51750009078E /* CurrencyConversionRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionRates.swift; sourceTree = "<group>"; };
 		61EEBDFB26EF5B220009078E /* NetworkSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSource.swift; sourceTree = "<group>"; };
 		61EEBDFD26EF5B550009078E /* TransactionNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionNetworkService.swift; sourceTree = "<group>"; };
+		61EEBE0226EFFBA80009078E /* ExpensesApp+Resolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExpensesApp+Resolver.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61EEBE0126EFFB5A0009078E /* Resolver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +154,7 @@
 				61393FA326ED8FAF0082651F /* Assets.xcassets */,
 				61393FA826ED8FAF0082651F /* Info.plist */,
 				61393FA526ED8FAF0082651F /* Preview Content */,
+				61EEBE0226EFFBA80009078E /* ExpensesApp+Resolver.swift */,
 			);
 			path = ExpensesApp;
 			sourceTree = "<group>";
@@ -250,6 +255,9 @@
 			dependencies = (
 			);
 			name = ExpensesApp;
+			packageProductDependencies = (
+				61EEBE0026EFFB5A0009078E /* Resolver */,
+			);
 			productName = ExpensesApp;
 			productReference = 61393F9C26ED8FAD0082651F /* ExpensesApp.app */;
 			productType = "com.apple.product-type.application";
@@ -321,6 +329,9 @@
 				Base,
 			);
 			mainGroup = 61393F9326ED8FAD0082651F;
+			packageReferences = (
+				61EEBDFF26EFFB5A0009078E /* XCRemoteSwiftPackageReference "Resolver" */,
+			);
 			productRefGroup = 61393F9D26ED8FAD0082651F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -366,6 +377,7 @@
 				61EEBDFA26EF51750009078E /* CurrencyConversionRates.swift in Sources */,
 				61EEBDF626EF27730009078E /* UserRepository.swift in Sources */,
 				61393FA226ED8FAD0082651F /* DashboardView.swift in Sources */,
+				61EEBE0326EFFBA80009078E /* ExpensesApp+Resolver.swift in Sources */,
 				61EEBDF426EF252C0009078E /* LocalSource.swift in Sources */,
 				61393FD826EDAFD40082651F /* Budget.swift in Sources */,
 				61393FE926EDD4F40082651F /* Date+Extensions.swift in Sources */,
@@ -708,6 +720,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		61EEBDFF26EFFB5A0009078E /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		61EEBE0026EFFB5A0009078E /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61EEBDFF26EFFB5A0009078E /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 61393F9426ED8FAD0082651F /* Project object */;
 }

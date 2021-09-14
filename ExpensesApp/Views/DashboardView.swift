@@ -5,12 +5,13 @@
 //  Created by Kurt Mohring on 12/09/21.
 //
 
+import Resolver
 import SwiftUI
 
 struct DashboardView: View {
     // MARK: - Private Variables
-    @EnvironmentObject private var userStore: UserStore
-    @EnvironmentObject private var transactionStore: TransactionStore
+    @InjectedObject private var userStore: UserStore
+    @InjectedObject private var transactionStore: TransactionStore
 
     // MARK: - Public Variables
     @Binding var tabSelection: Int
@@ -117,7 +118,5 @@ private extension DashboardView {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         DashboardView(tabSelection: .constant(1))
-            .environmentObject(UserStore())
-            .environmentObject(TransactionStore())
     }
 }

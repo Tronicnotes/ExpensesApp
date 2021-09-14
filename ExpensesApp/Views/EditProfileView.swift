@@ -5,12 +5,13 @@
 //  Created by Kurt Mohring on 12/09/21.
 //
 
+import Resolver
 import SwiftUI
 
 struct EditProfileView: View {
     // MARK: - Private Variables
     @Environment(\.presentationMode) private var presentationMode
-    @EnvironmentObject private var userStore: UserStore
+    @InjectedObject private var userStore: UserStore
     @State private var userData: User.Data = User.Data()
 
     // MARK: - Content Builder
@@ -105,6 +106,5 @@ private extension EditProfileView {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         EditProfileView()
-            .environmentObject(UserStore())
     }
 }
