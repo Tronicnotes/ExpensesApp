@@ -7,9 +7,10 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 protocol UserInteractor {
-    func loadUserData()
+    func loadUserData(finishedLoading: Binding<Bool>)
     func saveUser(_ data: User.Data)
     func saveUserData()
 }
@@ -27,13 +28,14 @@ class RealUserInteractor: UserInteractor {
     }
 
     // MARK: - Public Methods
-    func loadUserData() {
+    func loadUserData(finishedLoading: Binding<Bool>) {
         repository.getUser()
             .receive(on: RunLoop.main)
             .sink {
                 if case let .failure(error) = $0 {
                     print(error.localizedDescription)
                 }
+                finishedLoading.wrappedValue = true
             } receiveValue: { [weak self] user in
                 self?.userStore.user = user
             }

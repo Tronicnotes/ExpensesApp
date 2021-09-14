@@ -15,27 +15,26 @@ struct MainView: View {
     @Injected private var transactionInteractor: TransactionInteractor
     @Injected private var userInteractor: UserInteractor
     @State private var showCreateUserScreen = false
-    @State private var tabSelection = 1
+    @State private var finishedLoading = false
 
     var body: some View {
-        TabView(selection: $tabSelection) {
-            DashboardView(tabSelection: $tabSelection).tabItem {
+        TabView {
+            DashboardView().tabItem {
                 Label("Dashboard", systemImage: "house")
             }
-            .tag(1)
             TransactionListView().tabItem {
                 Label("Transactions", systemImage: "list.bullet")
             }
-            .tag(2)
             EditProfileView().tabItem {
                 Label("Profile", systemImage: "person")
             }
-            .tag(3)
         }
         .onAppear {
             transactionInteractor.fetchTransactions()
-            userInteractor.loadUserData()
-//            showCreateUserScreen = uszerStore.user == nil
+            userInteractor.loadUserData(finishedLoading: $finishedLoading)
+        }
+        .onChange(of: finishedLoading) { _ in
+            showCreateUserScreen = userStore.user == nil
         }
         .fullScreenCover(isPresented: $showCreateUserScreen) {
             EditProfileView()

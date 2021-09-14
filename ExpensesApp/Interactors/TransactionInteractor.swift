@@ -13,7 +13,7 @@ protocol TransactionInteractor {
     func fetchTransactions()
     func deleteTransaction(at indexSet: IndexSet, for key: Date)
     func saveTransactions()
-    func getCurrentConversionRate(conversionRate: Binding<Double?>)
+    func fetchConversionRate(for date: Date, conversionRate: Binding<Double?>)
 }
 
 class RealTransactionInteractor: TransactionInteractor {
@@ -61,8 +61,8 @@ class RealTransactionInteractor: TransactionInteractor {
             .store(in: &cancellable)
     }
 
-    func getCurrentConversionRate(conversionRate: Binding<Double?>) {
-        repository.fetchConversionRates()
+    func fetchConversionRate(for date: Date, conversionRate: Binding<Double?>) {
+        repository.fetchConversionRates(for: date)
             .sink {
                 if case let .failure(error) = $0 {
                     print(error)

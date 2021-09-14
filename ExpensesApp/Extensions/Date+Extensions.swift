@@ -20,6 +20,12 @@ extension Date {
         dateFormatter.dateFormat = "MMM dd, h:mm a"
         return dateFormatter.string(from: self)
     }
+
+    func YYYYMMDD() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        return dateFormatter.string(from: self)
+    }
 }
 
 // MARK: - Date Utils

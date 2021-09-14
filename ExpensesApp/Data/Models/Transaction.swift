@@ -58,7 +58,7 @@ extension Transaction {
             return amount
         }
     }
-    
+
     var formattedNZDAmount: String {
         if currencyType == .usd, let conversionRate = self.conversionRate {
             return (amount * conversionRate).formatCurrencyWithISO("NZD") ?? 0.formatCurrency()!

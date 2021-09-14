@@ -11,7 +11,7 @@ import Combine
 protocol LocalSource {
     static var filePathComponent: String { get }
     func readLocalData<T: Codable>() -> AnyPublisher<T, Error>
-    func saveLocalData<T: Encodable>(_ data: T) -> AnyPublisher<Bool, Error>
+    func saveLocalData<T: Encodable>(_ data: T) -> AnyPublisher<Void, Error>
 }
 
 extension LocalSource {
@@ -45,13 +45,13 @@ extension LocalSource {
         return future.eraseToAnyPublisher()
     }
 
-    func saveLocalData<T: Encodable>(_ data: T) -> AnyPublisher<Bool, Error> {
-        let future = Future<Bool, Error> { promise in
+    func saveLocalData<T: Encodable>(_ data: T) -> AnyPublisher<Void, Error> {
+        let future = Future<Void, Error> { promise in
             DispatchQueue.global(qos: .background).async {
                 do {
                     let encodedData = try JSONEncoder().encode(data)
                     try encodedData.write(to: Self.fileURL)
-                    promise(.success(true))
+                    promise(.success(()))
                 } catch {
                     promise(.failure(error))
                 }

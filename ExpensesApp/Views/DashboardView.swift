@@ -13,9 +13,6 @@ struct DashboardView: View {
     @InjectedObject private var userStore: UserStore
     @InjectedObject private var transactionStore: TransactionStore
 
-    // MARK: - Public Variables
-    @Binding var tabSelection: Int
-
     // MARK: - Content Builder
     var body: some View {
         NavigationView {
@@ -138,6 +135,6 @@ private extension DashboardView {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardView(tabSelection: .constant(1))
+        DashboardView()
     }
 }

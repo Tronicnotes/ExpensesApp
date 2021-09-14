@@ -10,7 +10,7 @@ import Combine
 
 protocol UserSource: LocalSource {
     func getUser() -> AnyPublisher<User, Error>
-    func saveUser(_ user: User) -> AnyPublisher<Bool, Error>
+    func saveUser(_ user: User) -> AnyPublisher<Void, Error>
 }
 
 struct UserRepository: UserSource {
@@ -23,7 +23,7 @@ struct UserRepository: UserSource {
         return self.readLocalData() as AnyPublisher<User, Error>
     }
 
-    func saveUser(_ user: User) -> AnyPublisher<Bool, Error> {
-        return self.saveLocalData(user) as AnyPublisher<Bool, Error>
+    func saveUser(_ user: User) -> AnyPublisher<Void, Error> {
+        return self.saveLocalData(user) as AnyPublisher<Void, Error>
     }
 }

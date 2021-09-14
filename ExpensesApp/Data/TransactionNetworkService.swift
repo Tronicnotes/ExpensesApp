@@ -9,21 +9,22 @@ import Foundation
 import Combine
 
 protocol TransactionNetworkSource: NetworkSource {
-    func fetchConversionRates() -> AnyPublisher<CurrencyConversionRates, Error>
+    func fetchConversionRates(for date: Date) -> AnyPublisher<CurrencyConversionRates, Error>
 }
 
 struct TransactionNetworkService: TransactionNetworkSource {
     private let endpoint: Endpoint
-    private let getConversionRatePath = "/live"
+    private let getConversionRatePath = "/historical"
 
     init(endpoint: Endpoint = Endpoint()) {
         self.endpoint = endpoint
     }
 
-    func fetchConversionRates() -> AnyPublisher<CurrencyConversionRates, Error> {
+    func fetchConversionRates(for date: Date) -> AnyPublisher<CurrencyConversionRates, Error> {
         let request = self.createRequest(from: endpoint.currencyEndpoint + getConversionRatePath,
                                          queryParamenters: [
                                             "access_key": endpoint.apiKey,
+                                            "date": date.YYYYMMDD(),
                                             "currencies": "NZD",
                                             "format": "1"
                                          ])

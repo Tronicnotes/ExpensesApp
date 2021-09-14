@@ -9,16 +9,12 @@ import Resolver
 import SwiftUI
 
 struct EditTransactionView: View {
-    @Injected private var interactor: TransactionInteractor
     @Binding var transactionData: Transaction.Data
 
     // MARK: - Content Builder
     var body: some View {
         Form {
             expenseDetailsSection
-        }
-        .onAppear {
-            interactor.getCurrentConversionRate(conversionRate: $transactionData.conversionRate)
         }
     }
 }

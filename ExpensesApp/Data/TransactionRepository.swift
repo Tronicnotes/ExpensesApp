@@ -10,8 +10,8 @@ import Combine
 
 protocol TransactionSource: LocalSource {
     func getTransactions() -> AnyPublisher<[Transaction], Error>
-    func saveTransactions(_ transactions: [Transaction]) -> AnyPublisher<Bool, Error>
-    func fetchConversionRates() -> AnyPublisher<CurrencyConversionRates, Error>
+    func saveTransactions(_ transactions: [Transaction]) -> AnyPublisher<Void, Error>
+    func fetchConversionRates(for date: Date) -> AnyPublisher<CurrencyConversionRates, Error>
 
 }
 
@@ -27,12 +27,12 @@ struct TransactionRepository: TransactionSource {
         return self.readLocalData() as AnyPublisher<[Transaction], Error>
     }
 
-    func saveTransactions(_ transactions: [Transaction]) -> AnyPublisher<Bool, Error> {
+    func saveTransactions(_ transactions: [Transaction]) -> AnyPublisher<Void, Error> {
         return self.saveLocalData(transactions)
     }
 
-    func fetchConversionRates() -> AnyPublisher<CurrencyConversionRates, Error> {
-        return self.networkingService.fetchConversionRates()
+    func fetchConversionRates(for date: Date) -> AnyPublisher<CurrencyConversionRates, Error> {
+        return self.networkingService.fetchConversionRates(for: date)
     }
 }
 

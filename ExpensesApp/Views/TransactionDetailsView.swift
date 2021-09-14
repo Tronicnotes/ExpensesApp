@@ -5,11 +5,13 @@
 //  Created by Kurt Mohring on 12/09/21.
 //
 
+import Resolver
 import SwiftUI
 
 struct TransactionDetailsView: View {
     // MARK: - Private Variables
     @Environment(\.presentationMode) private var presentationMode
+    @Injected private var interactor: TransactionInteractor
     @State private var transactionData = Transaction.Data()
     @State private var editScreenPresented = false
     private let categoryAvatarSize: CGFloat = 32
@@ -29,6 +31,9 @@ struct TransactionDetailsView: View {
         .navigationBarItems(trailing: Button("Edit") {
             editScreenPresented = true
         })
+        .onChange(of: transactionData.date) { date in
+            interactor.fetchConversionRate(for: date, conversionRate: $transactionData.conversionRate)
+        }
         .fullScreenCover(isPresented: $editScreenPresented) {
             NavigationView {
                 EditTransactionView(transactionData: $transactionData)
@@ -66,7 +71,7 @@ private extension TransactionDetailsView {
 
     @ViewBuilder
     var footerView: some View {
-        if let conversionRate = transactionData.conversionRate {
+        if transactionData.currencyType == .usd, let conversionRate = transactionData.conversionRate {
             Text("The conversion rate between USD to NZD at this time was: \(conversionRate)")
         }
     }
