@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import Combine
-import SwiftUI
 
 class TransactionStore: ObservableObject {
     typealias GroupedTransactions = [Date: [Transaction]]
@@ -17,49 +15,6 @@ class TransactionStore: ObservableObject {
         }
     }
     @Published var groupedTransactions: GroupedTransactions = [:]
-
-    private let repository: TransactionSource
-    private var cancellable: AnyCancellable?
-
-    // MARK: - Initialiser
-    init(repository: TransactionSource = TransactionRepository()) {
-        self.repository = repository
-        fetchTransactions()
-    }
-
-    // MARK: - Public Methods
-    func fetchTransactions() {
-        cancellable = repository.getTransactions()
-            .sink {
-                if case let .failure(error) = $0 {
-                    print(error)
-                }
-            } receiveValue: { [weak self] transactions in
-                self?.transactions = transactions
-            }
-    }
-
-    func saveTransactions() {
-        cancellable = repository.saveTransactions(transactions)
-            .sink {
-                if case let .failure(error) = $0 {
-                    print(error)
-                }
-            } receiveValue: { _ in
-                print("Successfully saved transactions")
-            }
-    }
-
-    func getCurrentConversionRate(conversionRate: Binding<Double?>) {
-        cancellable = repository.fetchConversionRates()
-            .sink {
-                if case let .failure(error) = $0 {
-                    print(error)
-                }
-            } receiveValue: { currencyConversionRates in
-                conversionRate.wrappedValue = currencyConversionRates.currentUSDToNZDRate
-            }
-    }
 }
 
 // MARK: - Private Methods

@@ -11,6 +11,7 @@ import SwiftUI
 struct TransactionListView: View {
 
     @InjectedObject private var transactionStore: TransactionStore
+    @Injected private var interactor: TransactionInteractor
     @State private var addTransactionPresented = false
     @State private var newTransactionData = Transaction.Data()
 
@@ -48,21 +49,17 @@ private extension TransactionListView {
             List {
                 ForEach(transactionStore.groupedTransactions.sorted(by: { $0.key > $1.key }), id: \.key) { date, transactions in
                     Section(header: Text(date.EEEEMMMDDYYYY())) {
-                            ForEach(transactions, id: \.self) { transaction in
-                                NavigationLink(
-                                    destination: TransactionDetailsView(transaction: binding(for: transaction)),
-                                    label: {
-                                        TransactionRowView(transaction: transaction)
-                                    })
-                            }
-                            .onDelete { indexSet in
-                                if let indexElement = indexSet.first,
-                                   let transaction = transactionStore.groupedTransactions[date]?[indexElement],
-                                   let index = transactionStore.transactions.firstIndex(of: transaction) {
-                                    transactionStore.transactions.remove(at: index)
-                                }
-                            }
+                        ForEach(transactions, id: \.self) { transaction in
+                            NavigationLink(
+                                destination: TransactionDetailsView(transaction: binding(for: transaction)),
+                                label: {
+                                    TransactionRowView(transaction: transaction)
+                                })
                         }
+                        .onDelete { indexSet in
+                            interactor.deleteTransaction(at: indexSet, for: date)
+                        }
+                    }
                 }
             }
             .listStyle(GroupedListStyle())

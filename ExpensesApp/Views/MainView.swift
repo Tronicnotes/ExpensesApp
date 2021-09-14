@@ -11,8 +11,9 @@ import SwiftUI
 struct MainView: View {
 
     @Environment(\.scenePhase) private var scenePhase
-    @Injected private var transactionStore: TransactionStore
-    @Injected private var userStore: UserStore
+    @InjectedObject private var userStore: UserStore
+    @Injected private var transactionInteractor: TransactionInteractor
+    @Injected private var userInteractor: UserInteractor
     @State private var showCreateUserScreen = false
     @State private var tabSelection = 1
 
@@ -32,15 +33,17 @@ struct MainView: View {
             .tag(3)
         }
         .onAppear {
-            showCreateUserScreen = userStore.user == nil
+            transactionInteractor.fetchTransactions()
+            userInteractor.loadUserData()
+//            showCreateUserScreen = uszerStore.user == nil
         }
         .fullScreenCover(isPresented: $showCreateUserScreen) {
             EditProfileView()
         }
         .onChange(of: scenePhase) { phase in
             if phase == .inactive {
-                transactionStore.saveTransactions()
-                userStore.saveUser()
+                transactionInteractor.saveTransactions()
+                userInteractor.saveUserData()
             }
         }
     }

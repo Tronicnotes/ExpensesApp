@@ -12,6 +12,7 @@ struct DashboardView: View {
     // MARK: - Private Variables
     @InjectedObject private var userStore: UserStore
     @InjectedObject private var transactionStore: TransactionStore
+    @Injected private var transactionInteractor: TransactionInteractor
 
     // MARK: - Public Variables
     @Binding var tabSelection: Int

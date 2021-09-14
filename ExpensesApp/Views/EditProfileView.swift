@@ -12,6 +12,7 @@ struct EditProfileView: View {
     // MARK: - Private Variables
     @Environment(\.presentationMode) private var presentationMode
     @InjectedObject private var userStore: UserStore
+    @Injected private var interactor: UserInteractor
     @State private var userData: User.Data = User.Data()
 
     // MARK: - Content Builder
@@ -75,11 +76,7 @@ private extension EditProfileView {
     var saveButtonView: some View {
         if userStore.user?.data != userData {
             Button {
-                if userStore.user == nil {
-                    userStore.user = User(from: userData)
-                } else {
-                    userStore.user?.update(from: userData)
-                }
+                interactor.saveUser(userData)
                 hideKeyboard()
                 presentationMode.wrappedValue.dismiss()
             } label: {

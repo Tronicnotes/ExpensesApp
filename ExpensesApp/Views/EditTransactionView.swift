@@ -9,7 +9,7 @@ import Resolver
 import SwiftUI
 
 struct EditTransactionView: View {
-    @InjectedObject private var transactionStore: TransactionStore
+    @Injected private var interactor: TransactionInteractor
     @Binding var transactionData: Transaction.Data
 
     // MARK: - Content Builder
@@ -18,7 +18,7 @@ struct EditTransactionView: View {
             expenseDetailsSection
         }
         .onAppear {
-            transactionStore.getCurrentConversionRate(conversionRate: $transactionData.conversionRate)
+            interactor.getCurrentConversionRate(conversionRate: $transactionData.conversionRate)
         }
     }
 }

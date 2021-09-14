@@ -11,17 +11,23 @@ import Resolver
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
         // MARK: - User Registrations
+        register { UserStore() }
+            .scope(.application)
         register { UserRepository() }
             .implements(UserSource.self)
-        register { UserStore(repository: resolve()) }
+        register { RealUserInteractor(repository: resolve(), userStore: resolve()) }
+            .implements(UserInteractor.self)
             .scope(.application)
         // MARK: - Transaction Registrations
+        register { TransactionStore() }
+            .scope(.application)
         register { Endpoint() }
         register { TransactionNetworkService(endpoint: resolve()) }
             .implements(TransactionNetworkSource.self)
         register { TransactionRepository(networkingService: resolve())}
             .implements(TransactionSource.self)
-        register { TransactionStore(repository: resolve()) }
-            .scope(.application)
+        register { RealTransactionInteractor(repository: resolve(), transactionStore: resolve()) }
+            .implements(TransactionInteractor.self)
+//            .scope(.application)
     }
 }
